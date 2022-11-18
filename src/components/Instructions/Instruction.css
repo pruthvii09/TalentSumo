@@ -1,0 +1,15 @@
+.sys_head{
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 5px 5px 0px 0px;
+}
+.instruct_container{
+    margin-top: 40px;
+    border: 1px solid #dfdfdf ;
+    border-radius: 5px;
+}
+.instruct{
+    padding: 12px;
+    border-bottom: 1px solid #dfdfdf;
+}
