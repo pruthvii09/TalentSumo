@@ -18,22 +18,27 @@ export const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents refresing of page
+
     if (data?.name?.length < 5) {
+      //name
       setError("Name must be at least 5 characters long!");
       setShowError(true);
       setEmptyFields([...emptyFields, "name"]);
     } else if (data?.email?.length <= 0) {
+      //email
       setEmptyFields((emptyFields) => [...emptyFields, "email"]);
       setError("Please enter email!");
       setShowError(true);
     } else if (data?.contact?.length !== 10) {
+      // contact
       setEmptyFields((emptyFields) => [...emptyFields, "contact"]);
       setError("Contact number must be at exacty 10 digits long!");
       setShowError(true);
     } else if (data?.access?.length <= 0) {
-      setError("Please enter college name!");
+      //acess code
+      setError("Please enter Access Code!");
       setShowError(true);
-      setEmptyFields((emptyFields) => [...emptyFields, "college"]);
+      setEmptyFields((emptyFields) => [...emptyFields, "access"]);
     } else {
       setError("");
       setShowError(false);
