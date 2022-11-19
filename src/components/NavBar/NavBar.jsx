@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./NavBar.css";
+import Profile from "../../assets/image.jpg";
 
 const NavBar = () => {
   const [toggle, setToggle] = useState(false);
@@ -9,17 +10,18 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <div className="brand-title">Brand Name</div>
-      <a href="#" className="toggle-button" onClick={handleToggle}>
+      <p className="toggle-button" onClick={handleToggle}>
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
-      </a>
+      </p>
       <div className={toggle ? "navbar-links" : "navbar-links active"}>
         <ul>
           <li>
             <a href="#">Home</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
+            <a href="#">{/* <img src={Profile} /> */}</a>
           </li>
         </ul>
       </div>

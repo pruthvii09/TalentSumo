@@ -34,6 +34,8 @@ input
   position: relative;
   padding: 10px;
   width: 90%;
+  outline: none;
+  padding-left: 30px;
     
 }
 h1
@@ -55,6 +57,7 @@ h1
 .field
 {
   margin-bottom: 15px;
+  position: relative;
 }
 
 @media (max-width:768px) {
@@ -67,7 +70,17 @@ h1
 }
 label{
   position: absolute;
-  color: red;
+  color: black;
+  padding: 2px;
   z-index: 100;
+  top: -11px;
+  left: 25px;
+  background-color: #fff;
+}
+i{
+  position: absolute;
+  z-index: 10;
   top: 10px;
+  left: 8px;
+  font-size: 1.20rem;
 }

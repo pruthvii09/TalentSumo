@@ -25,7 +25,7 @@ export const Form = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-  }, [formErrors]);
+  }, [formErrors, formValues, isSubmit]);
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
@@ -44,7 +44,7 @@ export const Form = () => {
   };
 
   const showInstruction = () => {
-    if (isSubmit) {
+    if (isSubmit === true) {
       setShow(true);
     }
   };
@@ -65,6 +65,9 @@ export const Form = () => {
           <div>
             <div className="field">
               {/* <label>Name</label> */}
+              <span>
+                <i className="bx bx-user"></i>
+              </span>
               <input
                 type="text"
                 name="name"
@@ -77,6 +80,9 @@ export const Form = () => {
             </div>
             <div className="field">
               {/* <label>Email</label> */}
+              <span>
+                <i className="bx bx-envelope"></i>
+              </span>
               <input
                 type="text"
                 name="email"
@@ -89,6 +95,9 @@ export const Form = () => {
             </div>
             <div className="field">
               {/* <label>Phone No.</label> */}
+              <span>
+                <i className="bx bx-phone-call"></i>
+              </span>
               <input
                 type="text"
                 name="phone"
@@ -101,6 +110,9 @@ export const Form = () => {
             </div>
             <div className="field">
               {/* <label>Access Code</label> */}
+              <span>
+                <i className="bx bx-lock-alt"></i>
+              </span>
               <input
                 type="text"
                 name="access"
