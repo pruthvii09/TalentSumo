@@ -8,25 +8,28 @@ export const Form = () => {
   const [formErrors, setFormErrors] = useState({});
   const [show, setShow] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const handleChange = (e) => {
+    //handling chnaging inputs
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //prevents refresing of page
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
 
   useEffect(() => {
-    console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
   }, [formErrors, formValues, isSubmit]);
+
   const validate = (values) => {
+    //validating
     const errors = {};
     if (!values.name) {
       errors.name = "Name is required!";
@@ -44,6 +47,7 @@ export const Form = () => {
   };
 
   const showInstruction = () => {
+    // is isSubmit is true then show instructions
     if (isSubmit === true) {
       setShow(true);
     }
@@ -66,7 +70,7 @@ export const Form = () => {
             <div className="field">
               {/* <label>Name</label> */}
               <span>
-                <i className="bx bx-user"></i>
+                <i className="bx bx-user icon"></i>
               </span>
               <input
                 type="text"
@@ -76,12 +80,12 @@ export const Form = () => {
                 onChange={handleChange}
                 autoComplete="off"
               />
-              <p>{formErrors.name}</p>
+              <p className="error_p">{formErrors.name}</p>
             </div>
             <div className="field">
               {/* <label>Email</label> */}
               <span>
-                <i className="bx bx-envelope"></i>
+                <i className="bx bx-envelope icon"></i>
               </span>
               <input
                 type="text"
@@ -91,12 +95,12 @@ export const Form = () => {
                 onChange={handleChange}
                 autoComplete="off"
               />
-              <p>{formErrors.email}</p>
+              <p className="error_p">{formErrors.email}</p>
             </div>
             <div className="field">
               {/* <label>Phone No.</label> */}
               <span>
-                <i className="bx bx-phone-call"></i>
+                <i className="bx bx-phone-call icon"></i>
               </span>
               <input
                 type="text"
@@ -106,22 +110,22 @@ export const Form = () => {
                 onChange={handleChange}
                 autoComplete="off"
               />
-              <p>{formErrors.phone}</p>
+              <p className="error_p">{formErrors.phone}</p>
             </div>
             <div className="field">
               {/* <label>Access Code</label> */}
               <span>
-                <i className="bx bx-lock-alt"></i>
+                <i className="bx bx-lock-alt icon"></i>
               </span>
               <input
                 type="text"
                 name="access"
-                placeholder="Enter Your Access Code"
+                placeholder="Enter Your Access Code "
                 value={formValues.access}
                 onChange={handleChange}
                 autoComplete="off"
               />
-              <p>{formErrors.access}</p>
+              <p className="error_p">{formErrors.access}</p>
             </div>
           </div>
           <button className="fluid ui button blue" onClick={showInstruction}>
@@ -131,7 +135,30 @@ export const Form = () => {
             {show && (
               <div>
                 <Instruction />
-                <button style={{ marginTop: "15px" }}>Start Test</button>
+                <button
+                  style={{ marginTop: "15px" }}
+                  onClick={() => setToggle(true)}
+                >
+                  Start Test
+                </button>
+                {toggle && (
+                  <div className="modal">
+                    <div className="overlay">
+                      <div className="modal-content">
+                        <h6>Are You Sure You want to start the test?</h6>
+                        <p className="modal_p">
+                          Lorem ipsum, dolor sit amet consectetur adipisicing
+                          elit. Laborum itaque minus modi culpa ratione
+                          perferendis magni asperiores neque officiis id.
+                        </p>
+                        <div className="buttons">
+                          <button>Yes</button>
+                          <button onClick={() => setToggle(false)}>No</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

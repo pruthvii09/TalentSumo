@@ -9,7 +9,7 @@ const NavBar = () => {
   };
   return (
     <div className="navbar">
-      <div className="brand-title">Brand Name</div>
+      <div className="brand-title">Talent Sumo</div>
       <p className="toggle-button" onClick={handleToggle}>
         <span className="bar"></span>
         <span className="bar"></span>
