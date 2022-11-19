@@ -19,22 +19,16 @@ export const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents refresing of page
 
-    const validEmail = new RegExp(
-      "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-    );
-
     if (data?.name?.length < 5) {
       //name
       setError("Name must be at least 5 characters long!");
       setShowError(true);
       setEmptyFields([...emptyFields, "name"]);
-    } else if (data?.email?.length > 0) {
-      console.log("Hello");
-      if (validEmail(data?.email)) {
-        setEmptyFields((emptyFields) => [...emptyFields, "email"]);
-        setError("Please enter email!");
-        setShowError(true);
-      }
+    } else if (data?.email?.length <= 0) {
+      //email
+      setEmptyFields((emptyFields) => [...emptyFields, "email"]);
+      setError("Please enter email!");
+      setShowError(true);
     } else if (data?.contact?.length !== 10) {
       // contact
       setEmptyFields((emptyFields) => [...emptyFields, "contact"]);
