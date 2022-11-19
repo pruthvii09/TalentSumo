@@ -1,54 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Instruction from "../Instructions/Instruction";
 import "./Form.css";
 
 export const Form = () => {
-  const initialValues = { name: "", email: "", phone: "", access: "" };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    access: "",
+  });
   const [show, setShow] = useState(false);
-  const [isSubmit, setIsSubmit] = useState(false);
   const [toggle, setToggle] = useState(false);
 
-  const handleChange = (e) => {
-    //handling chnaging inputs
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
+  const [emptyFields, setEmptyFields] = useState([]);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents refresing of page
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-  };
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors, formValues, isSubmit]);
-
-  const validate = (values) => {
-    //validating
-    const errors = {};
-    if (!values.name) {
-      errors.name = "Name is required!";
-    }
-    if (!values.email) {
-      errors.email = "Email is required!";
-    }
-    if (!values.access) {
-      errors.access = "Access Code is required!";
-    }
-    if (!values.phone) {
-      errors.phone = "Phone No. is required! ";
-    }
-    return errors;
-  };
-
-  const showInstruction = () => {
-    // is isSubmit is true then show instructions
-    if (isSubmit === true) {
+    if (data?.name?.length < 5) {
+      setError("Name must be at least 5 characters long!");
+      setShowError(true);
+      setEmptyFields([...emptyFields, "name"]);
+    } else if (data?.email?.length <= 0) {
+      setEmptyFields((emptyFields) => [...emptyFields, "email"]);
+      setError("Please enter email!");
+      setShowError(true);
+    } else if (data?.contact?.length !== 10) {
+      setEmptyFields((emptyFields) => [...emptyFields, "contact"]);
+      setError("Contact number must be at exacty 10 digits long!");
+      setShowError(true);
+    } else if (data?.access?.length <= 0) {
+      setError("Please enter college name!");
+      setShowError(true);
+      setEmptyFields((emptyFields) => [...emptyFields, "college"]);
+    } else {
+      setError("");
+      setShowError(false);
       setShow(true);
     }
   };
@@ -76,11 +64,10 @@ export const Form = () => {
                 type="text"
                 name="name"
                 placeholder="Enter Your Name"
-                value={formValues.name}
-                onChange={handleChange}
+                value={data?.name}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
                 autoComplete="off"
               />
-              <p className="error_p">{formErrors.name}</p>
             </div>
             <div className="field">
               {/* <label>Email</label> */}
@@ -91,11 +78,10 @@ export const Form = () => {
                 type="text"
                 name="email"
                 placeholder="Enter Your Email"
-                value={formValues.email}
-                onChange={handleChange}
+                value={data?.email}
+                onChange={(e) => setData({ ...data, email: e.target.value })}
                 autoComplete="off"
               />
-              <p className="error_p">{formErrors.email}</p>
             </div>
             <div className="field">
               {/* <label>Phone No.</label> */}
@@ -106,11 +92,10 @@ export const Form = () => {
                 type="text"
                 name="phone"
                 placeholder="Enter Your Phone Number"
-                value={formValues.phone}
-                onChange={handleChange}
+                value={data?.contact}
+                onChange={(e) => setData({ ...data, contact: e.target.value })}
                 autoComplete="off"
               />
-              <p className="error_p">{formErrors.phone}</p>
             </div>
             <div className="field">
               {/* <label>Access Code</label> */}
@@ -120,15 +105,24 @@ export const Form = () => {
               <input
                 type="text"
                 name="access"
-                placeholder="Enter Your Access Code "
-                value={formValues.access}
-                onChange={handleChange}
+                placeholder="Enter access code"
+                value={data?.access}
+                onChange={(e) => setData({ ...data, access: e.target.value })}
+                className={emptyFields?.includes("email") ? "error_field" : ""}
                 autoComplete="off"
               />
-              <p className="error_p">{formErrors.access}</p>
             </div>
+            {showError && (
+              <div className="error">
+                {error}
+                <i
+                  className="uil uil-times-circle"
+                  onClick={() => setShowError(!showError)}
+                ></i>
+              </div>
+            )}
           </div>
-          <button className="fluid ui button blue" onClick={showInstruction}>
+          <button className="fluid ui button blue" onClick={handleSubmit}>
             Validate to Start
           </button>
           <div style={{ marginTop: "20px" }}>
