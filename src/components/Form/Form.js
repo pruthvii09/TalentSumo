@@ -4,6 +4,7 @@ import "./Form.css";
 
 export const Form = () => {
   const [data, setData] = useState({
+    // inital data
     name: "",
     email: "",
     contact: "",
@@ -18,6 +19,8 @@ export const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents refresing of page
+    console.log("hii");
+    const regEx = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/g;
 
     if (data?.name?.length < 5) {
       //name
@@ -28,6 +31,11 @@ export const Form = () => {
       //email
       setEmptyFields((emptyFields) => [...emptyFields, "email"]);
       setError("Please enter email!");
+      setShowError(true);
+    } else if (!regEx.test(data?.email)) {
+      console.log(data?.email);
+      setEmptyFields((emptyFields) => [...emptyFields, "email"]);
+      setError("Not valid Email");
       setShowError(true);
     } else if (data?.contact?.length !== 10) {
       // contact
@@ -43,6 +51,7 @@ export const Form = () => {
       setError("");
       setShowError(false);
       setShow(true);
+      console.log(data);
     }
   };
 

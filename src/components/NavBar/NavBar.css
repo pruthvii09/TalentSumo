@@ -6,9 +6,13 @@
     background-color: rgb(255, 255, 255);
     color: #333;
     box-shadow: 0 0 10px 10px rgba(0,0,0,0.25);
+    padding: 10px;
 }
 
-.brand-title{
+.brand-title a{
+    text-decoration: none;
+    color: #333;
+    font-weight: 800;
     font-size: 1.5rem;
     margin: 0.5rem;
 }
