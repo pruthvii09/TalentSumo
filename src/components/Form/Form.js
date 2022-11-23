@@ -12,6 +12,7 @@ export const Form = () => {
   });
   const [show, setShow] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   const [emptyFields, setEmptyFields] = useState([]);
   const [error, setError] = useState("");
@@ -114,10 +115,22 @@ export const Form = () => {
             <div className="field">
               {/* <label>Access Code</label> */}
               <span>
+                {showPass ? (
+                  <i
+                    className="bx bx-show pass"
+                    onClick={() => setShowPass(!showPass)}
+                  ></i>
+                ) : null}
+                {!showPass ? (
+                  <i
+                    className="bx bx-hide pass"
+                    onClick={() => setShowPass(!showPass)}
+                  ></i>
+                ) : null}
                 <i className="bx bx-lock-alt icon"></i>
               </span>
               <input
-                type="text"
+                type={showPass ? "text" : "password"}
                 name="access"
                 placeholder="Enter access code"
                 value={data?.access}
